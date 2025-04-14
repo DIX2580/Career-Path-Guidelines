@@ -65,7 +65,7 @@ const Courses = () => {
     const fetchEnrolledCourses = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/user/courses`,
+          `${process.env.REACT_APP_API_URL || 'https://career-path-guidelines-backend.onrender.com'}/api/user/courses`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         
@@ -92,7 +92,7 @@ const Courses = () => {
     
     try {
       await axios.post(
-        `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/user/enroll`,
+        `${process.env.REACT_APP_API_URL || 'https://career-path-guidelines-backend.onrender.com'}/api/user/enroll`,
         { courseId },
         { headers: { Authorization: `Bearer ${token}` } }
       );

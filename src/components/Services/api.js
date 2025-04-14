@@ -4,7 +4,7 @@ import axios from 'axios';
 
 // Create an axios instance with base URL
 const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'https://career-path-guidelines-backend.onrender.com',
+  baseURL: process.env.REACT_APP_API_URL || 'https://career-path-guidelines-backend.onrender.com/',
 });
 
 // Add authorization header with JWT token for authenticated requests

@@ -23,7 +23,7 @@ export default function Iridescence() {
   const [user, setUser] = useState(null);
 
   // Backend URL - should be in your environment variables in production
-  const API_URL = 'https://career-path-guidelines-backend.onrender.com/user-career';
+  const API_URL = 'https://career-path-guidelines-backend.onrender.com/api/user-career';
 
   useEffect(() => {
     // Check if user is logged in

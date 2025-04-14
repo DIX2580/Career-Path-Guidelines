@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
-import axios from 'axios';
+import { getDatabase, ref, push, set } from 'firebase/database';
+import emailjs from 'emailjs-com';
+import { auth } from "../../firebase/auth";
 import { toast } from 'react-toastify';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
@@ -150,10 +152,11 @@ const CareerSupport = () => {
   
   // Check if user is authenticated
   useEffect(() => {
-    const token = localStorage.getItem('mongoToken');
-    if (!token) {
-      navigate('/');
-    }
+    auth.onAuthStateChanged((user) => {
+      if (!user) {
+        navigate('/');
+      }
+    });
   }, [navigate]);
 
   const scrollToPricing = () => {
@@ -170,30 +173,40 @@ const CareerSupport = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const { name, email, message } = formData;
-    
-    try {
-      // Get authentication token
-      const token = localStorage.getItem('mongoToken');
-      
-      // Submit query to MongoDB through our API
-      await axios.post(
-        `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/career-queries`, 
-        { name, email, message },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      
-      setShowPopup(true);
-      setFormData({ name: '', email: '', message: '' });
-      
-      toast.success('Query submitted successfully!');
-    } catch (error) {
-      console.error('Error submitting query:', error);
-      toast.error('Failed to submit your query. Please try again.');
-    }
+    const params = {
+      name,
+      email,
+      message,
+      created_date: new Date().toISOString(),
+    };
+
+    // Send email using EmailJS
+    emailjs.send("service_5wwoq0k", "template_pg1iusg")
+    .then(() => {
+        console.log('Email sent successfully');
+      })
+      .catch((error) => {
+        console.error('Email send error:', error);
+        toast.error('Failed to send email. Please try again.');
+      });
+
+    // Store form data in Firebase Realtime Database
+    const db = getDatabase();
+    const queriesRef = ref(db, 'careerQueries');
+    const newQueryRef = push(queriesRef);
+    set(newQueryRef, params)
+      .then(() => {
+        setShowPopup(true);
+        setFormData({ name: '', email: '', message: '' });
+      })
+      .catch((error) => {
+        console.error('Error submitting query:', error);
+        toast.error('Failed to submit your query. Please try again.');
+      });
   };
 
   const closePopup = () => {
@@ -245,7 +258,7 @@ const CareerSupport = () => {
       ],
       primaryAction: {
         label: "Get Started",
-        onClick: () => navigate('/livechat')
+        onClick: () => window.location.href = '/livechat'
       }
     },
     {
@@ -259,7 +272,7 @@ const CareerSupport = () => {
       ],
       primaryAction: {
         label: "Choose Plan",
-        onClick: () => navigate('/payment', { state: { plan: 'basic' } })
+        onClick: () => {}
       }
     },
     {
@@ -273,7 +286,7 @@ const CareerSupport = () => {
       ],
       primaryAction: {
         label: "Choose Plan",
-        onClick: () => navigate('/payment', { state: { plan: 'premium' } })
+        onClick: () => {}
       }
     }
   ];
@@ -521,4 +534,4 @@ const CareerSupport = () => {
   );
 };
 
-export default CareerSupport; 
+export default CareerSupport;

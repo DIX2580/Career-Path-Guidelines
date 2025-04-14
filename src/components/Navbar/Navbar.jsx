@@ -8,7 +8,7 @@
   import axios from "axios";
 
   // API URL constants
-  const API_BASE_URL = "https://career-path-guidelines-backend.onrender.com";
+  const API_BASE_URL = "https://career-path-guidelines-backend.onrender.com/api";
 
   // Navbar Component
   const Navbar = ({ isLoginPage }) => {
