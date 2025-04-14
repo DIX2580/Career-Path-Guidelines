@@ -30,7 +30,7 @@ const Profile = () => {
         }
 
         // Fetch user data from API
-        const response = await axios.get("http://localhost:5000/api/auth/me", {
+        const response = await axios.get("https://career-path-guidelines-backend.onrender.com/auth/me", {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -105,7 +105,7 @@ const Profile = () => {
       // Update user profile with the new image URL
       const token = localStorage.getItem("mongoToken");
       await axios.patch(
-        "http://localhost:5000/api/auth/update-profile",
+        "https://career-path-guidelines-backend.onrender.com/auth/update-profile",
         { profilePicture: imageUrl },
         {
           headers: {

@@ -132,7 +132,7 @@ const SignUpForm = () => {
 
       // Make API call to your backend registration endpoint
       const response = await axios.post(
-        "http://localhost:5000/api/auth/register", 
+        "https://career-path-guidelines-backend.onrender.com/auth/register", 
         userData
       );
 

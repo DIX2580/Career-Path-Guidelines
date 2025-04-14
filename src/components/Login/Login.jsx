@@ -16,7 +16,7 @@ import Navbar from "../Navbar/Navbar";
 import axios from "axios";
 
 // API URL constants
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "https://career-path-guidelines-backend.onrender.com";
 
 // Helper function to authenticate user with MongoDB backend
 const authenticateWithBackend = async (email, password) => {
