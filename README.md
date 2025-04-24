@@ -1,37 +1,41 @@
-# Student Carrier Path👨‍🏫
-1. Clone this repository to your local machine using:
+# 🚀 Career Path Guideline 👨‍🏫
 
-   ```
-   https://github.com/DIX2580/college.git
-   ```
+An interactive web platform that helps students choose and navigate their ideal career paths. Based on user input (class, interests, goals), it suggests multiple learning tracks and highlights the best option with animated guidance.
 
-2. Navigate to the project directory:
+---
 
-   ```
-   cd College
-   ```
+## 🌍 Live Demo
 
-3. Install the required dependencies using npm:
+🔗 [Visit the App](https://career-path-guidelines.onrender.com/)
 
-   ```
-   npm install
-   ```
+---
 
-4. Configure Firebase: Create an account on firebase [https://console.firebase.google.com/](https://console.firebase.google.com/) and craete a project in it.
+## 🛠️ Tech Stack
 
-    - **Useful Resource:** [A ChatGPT chat for configuring firebase.](https://chat.openai.com/share/4f1645a4-b6a0-40d0-b42b-9263236824f0)
- 
+### ⚙️ Frontend
 
-5. Create **.env file** and add all the firebase environment variables listed in **.env.example**  file with valid values.
+- **Framework**: React + Vite  
+- **Styling**: Tailwind CSS, Ant Design  
+- **Routing**: React Router  
+- **State Management**: Redux, Redux Persist  
+- **Animations & UI**: Framer Motion, AOS, Lottie, Slick Carousel  
+- **Icons**: Font Awesome, Heroicons, Boxicons  
+- **Others**: EmailJS, Axios, dotenv  
 
-6. Start the server:
+### 🧠 Backend
 
-   ```
-   npm run dev
-   ```
+- **Database**: MongoDB – Stores user profiles, career paths, courses  
+- **Server**: Express.js – RESTful APIs  
+- **Runtime**: Node.js  
+- **ODM**: Mongoose  
+- **Authentication**:  
+  - JWT – Session security  
+  - Bcrypt.js – Password hashing  
 
-7. Open your web browser and visit `http://localhost:5173` to access the Career Path guideline application.
+---
 
-<hr>
+## 📦 Installation
 
-
+1. **Clone the Repository**  
+   ```bash
+   git clone https://github.com/DIX2580/college.git
