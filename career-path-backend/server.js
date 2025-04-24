@@ -33,7 +33,7 @@ app.use('/api/social-profiles', socialProfileRoutes); // Add this line
 
 // Basic route
 app.get('/', (req, res) => {
-  res.send('Career Path API is running');
+  res.send('Kids Stay Away');
 });
 
 // Error handling middleware

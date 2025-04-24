@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { motion } from 'framer-motion';
-import { getDatabase, ref, push, set } from 'firebase/database';
 import emailjs from 'emailjs-com';
-import { auth } from "../../firebase/auth";
 import { toast } from 'react-toastify';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
@@ -150,13 +148,17 @@ const CareerSupport = () => {
   const navigate = useNavigate();
   const pricingSectionRef = useRef(null);
   
-  // Check if user is authenticated
+  // Check if user is authenticated - modified to use a mock authentication check
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (!user) {
+    // Replace Firebase auth check with session check or other auth method
+    const checkAuth = () => {
+      const isAuthenticated = localStorage.getItem('userAuthenticated');
+      if (!isAuthenticated) {
         navigate('/');
       }
-    });
+    };
+    
+    checkAuth();
   }, [navigate]);
 
   const scrollToPricing = () => {
@@ -186,26 +188,19 @@ const CareerSupport = () => {
 
     // Send email using EmailJS
     emailjs.send("service_5wwoq0k", "template_pg1iusg")
-    .then(() => {
-        console.log('Email sent successfully');
-      })
-      .catch((error) => {
-        console.error('Email send error:', error);
-        toast.error('Failed to send email. Please try again.');
-      });
-
-    // Store form data in Firebase Realtime Database
-    const db = getDatabase();
-    const queriesRef = ref(db, 'careerQueries');
-    const newQueryRef = push(queriesRef);
-    set(newQueryRef, params)
       .then(() => {
+        console.log('Email sent successfully');
+        // Store form data in local storage or another service instead of Firebase
+        const careerQueries = JSON.parse(localStorage.getItem('careerQueries') || '[]');
+        careerQueries.push(params);
+        localStorage.setItem('careerQueries', JSON.stringify(careerQueries));
+        
         setShowPopup(true);
         setFormData({ name: '', email: '', message: '' });
       })
       .catch((error) => {
-        console.error('Error submitting query:', error);
-        toast.error('Failed to submit your query. Please try again.');
+        console.error('Email send error:', error);
+        toast.error('Failed to send email. Please try again.');
       });
   };
 
