@@ -373,17 +373,13 @@ body {
 
 /* Button Container Styles */
 .button-container {
-  background: var(--gradient) !important;
   border: none !important;
   border-radius: 30px !important;
   display: flex !important;
   padding: 12px 20px !important;
   width: fit-content !important;
   cursor: pointer !important;
-  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4) !important;
-  transition: all 0.3s ease !important;
-  transform: translateY(30px);
-  opacity: 0;
+
 }
 
 .course-card:hover .button-container {
